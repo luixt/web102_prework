@@ -45,6 +45,7 @@ function addGamesToPage(games) {
             <h2>${games[i].name}</h2>
             <p>${games[i].description}</p>
             <img class="game-img" src="${games[i].img}" alt="Picture of ${games.name}" />
+            <p>Unique Donators: ${games[i].backers}</p>
         `;
 
         // append the game to the games-container
@@ -67,20 +68,40 @@ addGamesToPage(GAMES_JSON)
 const contributionsCard = document.getElementById("num-contributions");
 
 // use reduce() to count the number of total contributions by summing the backers
+const totalContributions = GAMES_JSON.reduce( (sum, game) => {
+    return sum + game.backers;
+  }, 0);
 
 
 // set the inner HTML using a template literal and toLocaleString to get a number with commas
+
+contributionsCard.innerHTML = `
+  <h2>${totalContributions.toLocaleString('en-US')}</h2>
+`;
 
 
 // grab the amount raised card, then use reduce() to find the total amount raised
 const raisedCard = document.getElementById("total-raised");
 
-// set inner HTML using template literal
+const totalRaised = GAMES_JSON.reduce((sum, game) => {
+    return sum + game.pledged;
+}, 0);
 
+// set inner HTML using template literal
+raisedCard.innerHTML = `
+    <h2>$${totalRaised.toLocaleString('en-US')}</h2>
+`;
 
 // grab number of games card and set its inner HTML
 const gamesCard = document.getElementById("num-games");
 
+const numGames = GAMES_JSON.reduce((sum) => {
+    return sum + 1;
+}, 0);
+
+gamesCard.innerHTML = `
+    <h2>${numGames}</h2>
+`;
 
 /*************************************************************************************
  * Challenge 5: Add functions to filter the funded and unfunded games
