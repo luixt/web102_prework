@@ -91,3 +91,15 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 0 30px lightblue;
 }
+
+button:active {
+    background-color: darkblue;
+    color: white;
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px black;
+  }
+
+#games-display {
+    text-align: center;
+    color: darkblue;
+}

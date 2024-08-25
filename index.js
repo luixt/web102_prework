@@ -109,6 +109,9 @@ gamesCard.innerHTML = `
  * Skills used: functions, filter
 */
 
+const display = document.getElementById("games-display");
+
+
 // show only games that do not yet have enough funding
 function filterUnfundedOnly() {
     deleteChildElements(gamesContainer);
@@ -118,6 +121,7 @@ function filterUnfundedOnly() {
         return game.goal > game.pledged;
       });
 
+    display.innerHTML = `Showing Unfunded Games Only`
     // use the function we previously created to add the unfunded games to the DOM
       addGamesToPage(listOfUnfundedGames);
 }
@@ -131,6 +135,8 @@ function filterFundedOnly() {
         return game.pledged >= game.goal;
       });
 
+    display.innerHTML = `Showing Funded Games Only`
+
     // use the function we previously created to add unfunded games to the DOM
     addGamesToPage(listOfFundedGames);
 }
@@ -138,6 +144,8 @@ function filterFundedOnly() {
 // show all games
 function showAllGames() {
     deleteChildElements(gamesContainer);
+
+    display.innerHTML = `Showing All Games`
 
     // add all games from the JSON data to the DOM
     addGamesToPage(GAMES_JSON);
