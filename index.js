@@ -44,7 +44,7 @@ function addGamesToPage(games) {
         gameElement.innerHTML = `
             <h2>${games[i].name}</h2>
             <p>${games[i].description}</p>
-            <img class="game-img" src="${games[i].img}" alt="Picture of ${games.name}" />
+            <img class="game-img" src="${games[i].img}" alt="Picture of ${games[i].name}" />
             <p>Unique Donors: ${games[i].backers}</p>
         `;
 
@@ -197,7 +197,26 @@ const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
 });
 
 // use destructuring and the spread operator to grab the first and second games
+const [first, second, ...others] = sortedGames;
 
 // create a new element to hold the name of the top pledge game, then append it to the correct element
+const topGame = document.createElement('div');
+topGame.innerHTML = `
+            <h2>${first.name}</h2>
+            <p>${first.description}</p>
+            <img class="game-img" src="${first.img}" alt="Picture of ${first.name}" />
+            <p>Total Funding: $${first.pledged.toLocaleString('es-US')}</p>
+        `;
+
+firstGameContainer.append(topGame);
 
 // do the same for the runner up item
+const runnerUp = document.createElement('div');
+runnerUp.innerHTML = `
+            <h2>${second.name}</h2>
+            <p>${second.description}</p>
+            <img class="game-img" src="${second.img}" alt="Picture of ${second.name}" />
+            <p>Total Funding: $${second.pledged.toLocaleString('es-US')}</p>
+        `;
+
+secondGameContainer.append(runnerUp);
